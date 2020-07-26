@@ -1,4 +1,4 @@
-%% BEGIN
+% BEGIN
 clc;clear all;close all;
 var=imread('l41ajay.bmp');
 imshow(var);
@@ -14,7 +14,7 @@ figure;
 imshow(subimage);
 
 
-%% CONTRAST ENHANCEMENT
+% CONTRAST ENHANCEMENT
 stretched_Image = adapthisteq(subimage,'clipLimit',0.015,'Distribution','rayleigh');
 SSIMVAL = ssim(stretched_Image,subimage)
 PSNR = psnr(stretched_Image,subimage)
@@ -25,14 +25,14 @@ subplot(2,2,4), imhist(stretched_Image), title('Histogram of Stretched Image');
 
 
 
-%% DISCRETE WAVELET TRANSFORM
+% DISCRETE WAVELET TRANSFORM
 [cA,cH,cV,cD] = dwt2(stretched_Image,'haar');
 cA=uint8(cA);
 figure;imshow(cA,[]);title('First Level Decomposition')
 
 
 
-%% EDGE DETECTION
+% EDGE DETECTION
 figure; imshow(cA,[]), title('Without noise')
 z=imnoise(cA,'gaussian');
 figure;
@@ -41,6 +41,8 @@ Ea = edge(cA,'canny',[0.15,0.28])
 Ed = edge(z,'canny',[0.15,0.32])
 figure;imshow(Ea), title('canny without noise')
 figure;imshow(Ed), title('canny with noise')
+
+% PRATT'S FIGURE OF MERIT FOR PERFORMANCE OF EDGE DETECTION
 Ea=double(Ea);
 Ed=double(Ed);
 [N,M]=size(Ea);
