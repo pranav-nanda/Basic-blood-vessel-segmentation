@@ -1,6 +1,6 @@
 % BEGIN
 clc;clear all;close all;
-var=imread('l41ajay.bmp');
+var=imread('input.bmp');
 imshow(var);
 var1=rgb2gray(var);
 figure
